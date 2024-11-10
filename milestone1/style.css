@@ -1,0 +1,89 @@
+*{
+    margin:0px;
+    padding:0px
+}
+#resume{
+    border: 3px solid black;
+    height: 1300px;
+    width:  1000px;
+    margin-left: 50px;
+    display: flex;
+}
+#left{
+    border: 3px solid rgb(118, 31, 31);
+    width: 400px;
+    height: 1300px;
+    background-color: black;
+}
+#profile{
+    border: 2px solid rgb(118, 31, 31);
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 50px
+}
+.objective{
+    height: 20px;
+    width: 250px;
+    border: 2px solid rgb(118, 31, 31);
+    padding:3%;
+    margin-left: 15px;
+}
+h3{
+    font-style: italic;
+}
+#right{
+    background-color:beige;
+    width:650px;
+    height: 1300px;
+
+}
+h2{
+    text-align: center;
+    text-transform: capitalize;
+    text-decoration: underline;
+    margin-top: 30px;
+}
+.headings{
+    height:30px;
+    width: 350px;
+    border: 2px solid black;
+    margin-left: 30px;
+    font-size: x-large;
+    text-align: center;
+    padding: 2%;
+    font-size:x-large;
+    font-style: italic;
+}
+p{
+    font-size: medium;
+    font-style: italic;
+}
+.info{
+    margin:30px;
+}
+.work{
+    height:30px;
+    width: 350px;
+    border: 2px solid black;
+    margin-left: 30px;
+    font-size: x-large;
+    text-align: center;
+    padding: 2%;
+    font-size:x-large;
+    font-style: italic;
+}
+#toggle{
+    height:30px;
+    width: 259px;
+    border: 2px solid black;
+    margin-left: 30px;
+    font-size:large;
+    text-align: center;
+    padding: 4px;
+    font-style: italic;
+    cursor:pointer;
+}
+#toggle:hover{
+    background-color: rgb(126, 154, 154);
+}
