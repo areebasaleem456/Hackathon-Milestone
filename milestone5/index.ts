@@ -1,16 +1,16 @@
 // Get references to the form and display area
-const form = document.getElementById("resume-form") as HTMLFormElement;
-const resume_display_element = document.getElementById(
-  "resume-display"
+const form = document.getElementById("resume") as HTMLFormElement;
+const resume = document.getElementById(
+  "display"
 ) as HTMLDivElement;
-const shareable_link_container = document.getElementById(
+const link = document.getElementById(
   "shareable"
 ) as HTMLDivElement;
-const shareable_link_element = document.getElementById(
+const element = document.getElementById(
   "shareable-link"
 ) as HTMLAnchorElement;
-const download_pdf_button = document.getElementById(
-  "download-pdf"
+const button = document.getElementById(
+  "download"
 ) as HTMLButtonElement;
 
 //Handle Form Submission
@@ -22,7 +22,7 @@ form.addEventListener("submit", (event: Event) => {
     .value;
   const name = (document.getElementById("name") as HTMLInputElement).value;
   const email = (document.getElementById("email") as HTMLInputElement).value;
-  const phone = (document.getElementById("phone") as HTMLInputElement).value;
+  const contact = (document.getElementById("phone") as HTMLInputElement).value;
   const education = (
     document.getElementById("education") as HTMLTextAreaElement
   ).value;
@@ -33,15 +33,15 @@ form.addEventListener("submit", (event: Event) => {
     .value;
 
   //Save from data in localStorage with the username as the key
-  const resume_data = {
+  const resumeData = {
     name,
     email,
-    phone,
+    contact,
     education,
     experience,
     skills,
   };
-  localStorage.setItem(username, JSON.stringify(resume_data));
+  localStorage.setItem(username, JSON.stringify(resumeData));
 
   //Generate the resume content dynamically
   const resumeHTML = `
@@ -49,7 +49,7 @@ form.addEventListener("submit", (event: Event) => {
 <h3>Personal Information</h3>
 <p><b>Name:</b> <span contenteditable="true">${name}</span></p>
 <p><b>E-mail:</b> <span contenteditable="true">${email}</span></p>
-<p><b>Contact:</b><span contenteditable="true"> ${phone}</span></p>
+<p><b>Contact:</b><span contenteditable="true"> ${contact}</span></p>
 
 <h3>Education</h3>
 <p contenteditable="true">${education}</p>
@@ -62,7 +62,7 @@ form.addEventListener("submit", (event: Event) => {
 `;
 
   // Display generated resume
-  resume_display_element.innerHTML = resumeHTML;
+  resume.innerHTML = resumeHTML;
 
   //Generate a shareable URL with username only
   const shareable_url = `${
@@ -70,39 +70,40 @@ form.addEventListener("submit", (event: Event) => {
   }?username=${encodeURIComponent(username)}`;
 
   //Display the shareable link
-  shareable_link_container.style.display = "block";
-  shareable_link_element.href = shareable_url;
-  shareable_link_element.textContent = shareable_url;
+  link.style.display = "block";
+  element.href = shareable_url;
+  element.textContent = shareable_url;
 });
 
-//Handle pdf Download
-download_pdf_button.addEventListener("click", () => {
-  window.print(); //it will open the print dialog and allow the user to save as PDF
+button.addEventListener("click", () => {
+  window.print();
 });
+
 
 //prefill the form based on the username in the url
 window.addEventListener("DOMContentLoaded", () => {
-  const url_params = new URLSearchParams(window.location.search);
-  const username = url_params.get("username");
+  const urlParams = new URLSearchParams(window.location.search);
+  const username = urlParams.get("username");
 
   if (username) {
     //Autofill form if data is found in local storage
-    const saved_resume = localStorage.getItem(username);
-  if (saved_resume) {
-    const resume_data = JSON.parse(saved_resume);
-    (document.getElementById("username") as HTMLInputElement).value = username;
-    (document.getElementById("name") as HTMLInputElement).value =
-      resume_data.name;
-    (document.getElementById("email") as HTMLInputElement).value =
-      resume_data.email;
-    (document.getElementById("phone") as HTMLInputElement).value =
-      resume_data.phone;
-    (document.getElementById("education") as HTMLInputElement).value =
-      resume_data.education;
-    (document.getElementById("experience") as HTMLInputElement).value =
-      resume_data.experience;
-    (document.getElementById("skills") as HTMLInputElement).value =
-      resume_data.skills;
+    const saveData = localStorage.getItem(username);
+    if (saveData) {
+      const resumeData = JSON.parse(saveData);
+      (document.getElementById("username") as HTMLInputElement).value =
+        username;
+      (document.getElementById("name") as HTMLInputElement).value =
+        resumeData.name;
+      (document.getElementById("email") as HTMLInputElement).value =
+        resumeData.email;
+      (document.getElementById("contact") as HTMLInputElement).value =
+        resumeData.phone;
+      (document.getElementById("education") as HTMLInputElement).value =
+        resumeData.education;
+      (document.getElementById("experience") as HTMLInputElement).value =
+        resumeData.experience;
+      (document.getElementById("skills") as HTMLInputElement).value =
+        resumeData.skills;
+    }
   }
-}
 });
